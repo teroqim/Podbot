@@ -68,6 +68,7 @@ exports.handle = (client) => {
     },
 
     satisfied() {
+      console.log('findshow satisfied:', Boolean(client.getConversationState().show))
       return Boolean(client.getConversationState().show)
     },
 
@@ -92,7 +93,7 @@ exports.handle = (client) => {
     prompt(done) {
       console.log('recommendSimilar prompt')
       searchSimilarShows(client.getConversationState().show, shows => {
-        console.log('recommendSimilar callback', shows)
+        console.log('recommendSimilar callback')
         client.addResponse('bot_recommend/3_podcasts', {
           'podcast_title#1': shows[0].title,
           'podcast_title#2': shows[1].title,

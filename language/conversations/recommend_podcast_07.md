@@ -7,4 +7,4 @@ What is your favorite podcast?
 * user_ask_recommendation/favorite_podcast
 
 < Right now I like [this week in startups](podcast_title)
-* bot_recommend/podcast
+* bot_recommend/single_podcast

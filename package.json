@@ -9,7 +9,9 @@
   "author": "<my-name> <<my-email-address>>",
   "license": "UNLICENSED",
   "dependencies": {
+    "audiosearch-client-node": "https://github.com/popuparchive/audiosearch-client-node.git",
     "initai-dev-server": "^0.4.8",
-    "initai-node": "~0.0.7"
+    "initai-node": "~0.0.7",
+    "whatwg-fetch": "^2.0.1"
   }
 }

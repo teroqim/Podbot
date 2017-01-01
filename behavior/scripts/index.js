@@ -1,41 +1,44 @@
 'use strict'
 const Audiosearch = require('./lib/audiosearch')
-const audiosearch = new Audiosearch(process.env.AUDIOSEARCH_APP_ID, process.env.AUDIOSEARCH_SECRET)
-
-function searchShows(query, callback){
-  audiosearch.searchShows(query)
-    .then(response => {
-      // console.log('search: '+response)
-      if (callback) {
-        callback(response.results)
-      }
-    })
-    .catch(ex => {
-      console.log(endpoint, ex)
-      if (callback) {
-        callback()
-      }
-    })
-}
-
-function searchSimilarShows(show, callback){
-  audiosearch.getRelated(show.id)
-    .then(response => {
-      // console.log(response)
-      if (callback) {
-        callback(response)
-      }
-    })
-    .catch(ex => {
-      console.log(endpoint, ex)
-      if (callback) {
-        callback()
-      }
-    })
-}
-
 
 exports.handle = (client) => {
+  const envVars = client.getEnvironment()
+  const auAppId = process.env.AUDIOSEARCH_APP_ID || envVars.AUDIOSEARCH_APP_ID
+  const auSecret = process.env.AUDIOSEARCH_SECRET || envVars.AUDIOSEARCH_SECRET
+  const audiosearch = new Audiosearch(auAppId, auSecret)
+
+  function searchShows(query, callback){
+    audiosearch.searchShows(query)
+      .then(response => {
+        // console.log('search: '+response)
+        if (callback) {
+          callback(response.results)
+        }
+      })
+      .catch(ex => {
+        console.log(endpoint, ex)
+        if (callback) {
+          callback()
+        }
+      })
+  }
+
+  function searchSimilarShows(show, callback){
+    audiosearch.getRelated(show.id)
+      .then(response => {
+        // console.log(response)
+        if (callback) {
+          callback(response)
+        }
+      })
+      .catch(ex => {
+        console.log(endpoint, ex)
+        if (callback) {
+          callback()
+        }
+      })
+  }
+
   // Create steps
   const sayHello = client.createStep({
     satisfied() {
@@ -49,17 +52,6 @@ exports.handle = (client) => {
         helloSent: true
       })
 
-      client.done()
-    }
-  })
-
-  const untrained = client.createStep({
-    satisfied() {
-      return false
-    },
-
-    prompt() {
-      client.addResponse('apology/untrained')
       client.done()
     }
   })
@@ -101,7 +93,7 @@ exports.handle = (client) => {
       console.log('recommendSimilar prompt')
       searchSimilarShows(client.getConversationState().show, shows => {
         console.log('recommendSimilar callback', shows)
-        client.addResponse('3_podcasts', {
+        client.addResponse('bot_recommend/3_podcasts', {
           'podcast_title#1': shows[0].title,
           'podcast_title#2': shows[1].title,
           'podcast_title#3': shows[2].title,

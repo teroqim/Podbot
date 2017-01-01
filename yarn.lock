@@ -599,15 +599,6 @@ http-signature@~1.1.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-"https://github.com/popuparchive/audiosearch-client-node.git":
-  name audiosearch-client-node
-  version "1.0.0"
-  resolved "https://github.com/popuparchive/audiosearch-client-node.git#1d39894f668cd79c84c34e6671cb10bd01fd74bf"
-  dependencies:
-    events "^1.0.2"
-    promise "^7.0.4"
-    request "^2.61.0"
-
 immutable@3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"

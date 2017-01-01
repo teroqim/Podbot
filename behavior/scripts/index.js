@@ -1,5 +1,5 @@
 'use strict'
-const Audiosearch = require('audiosearch-client-node')
+const Audiosearch = require('.lib/audiosearch')
 const audiosearch = new Audiosearch(process.env.AUDIOSEARCH_APP_ID, process.env.AUDIOSEARCH_SECRET)
 
 function searchShows(query, callback){
